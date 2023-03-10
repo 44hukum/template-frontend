@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Need to change the Proxy for different backend, this repo is configured for Django running on localhost:8000
 
 ## Available Scripts
 
