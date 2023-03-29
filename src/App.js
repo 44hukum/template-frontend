@@ -1,47 +1,27 @@
-import React, { Component } from "react"
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Index from "./pages";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
-class App extends Component{
-  constructor(props){
-    super(props);
-    this.state ={
-      viewActive: false,
-      activeItem:{
-        name: "",
-        active: true
-      },
-      users:[]
-    }
-  }
 
-  async componentDidMount(){
-    try{
-      const res = await fetch('http://localhost:8000/api/users')
-      const users = await res.json()
-      console.log(users)
-      this.setState({
-        users
-      });
-    } catch(e){
-      console.log(e)
-    }
-  }
-
-  renderItems = ()=>{
-
-    return this.state.users.map(users => (
-      <li>
-            {users.active}, 
-        {users.name} </li>
-    ));
-  }
-
-  render(){
-    return(
-      <div>
-        {this.renderItems()}
-      </div>
-    )
-  }
-}
-
+const App = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/login/" element={<Login />} />
+      <Route path="/register/" element={<Registration/>} />
+    </Routes>
+  );
+};
 export default App;
